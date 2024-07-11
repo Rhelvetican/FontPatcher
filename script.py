@@ -2,14 +2,10 @@ import os
 
 
 def main():
-    dirs = os.listdir("./font")
-    for dir in dirs:
-        if dir.endswith(".ttf") or dir.endswith(".otf"):
-            os.system(f"fontforge -script font-patcher font/{dir}")
-            continue
-        dir = os.listdir(f"./font/{dir}")
-        for font in dir:
-            os.system(f"fontforge -script font-patcher font/carto/{font}")
+    directory = input("Enter the directory path: ")
+    dir = os.listdir(f"./{directory}")
+    for font in dir:
+        os.system(f"fontforge -script font-patcher --complete -q -l --careful -out ./patched/{directory.replace("font/", "/")}/ ./{directory}/{font}")
 
 
 if __name__ == "__main__":
